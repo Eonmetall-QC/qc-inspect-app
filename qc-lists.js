@@ -64,7 +64,8 @@ window.QC_LISTS = {
   try{device=(localStorage.getItem(KEY)||"").trim();}catch(e){}
   if(!device){var en="";try{en=(window.prompt("One-time setup. Enter this tablet's name (e.g. TAB-IPQC-2):")||"").trim();}catch(e){}if(!en)return;device=en.slice(0,60);try{localStorage.setItem(KEY,device);}catch(e){}}
   var SID=Math.random().toString(36).slice(2)+"-"+Date.now();
-  function desc(){try{if(typeof descriptionValue==="function")return String(descriptionValue()||"");}catch(e){}try{if(window.descriptionValue)return String(window.descriptionValue()||"");}catch(e){}return (document.title||"form").trim();}
+  function clean(s){return String(s||"").replace(/QC Inspection Form\s*[\u2014\u2013-]\s*/i,"").replace(/\s{2,}/g," ").trim();}
+  function desc(){var d="";try{if(typeof descriptionValue==="function")d=descriptionValue();}catch(e){}if(!d){try{if(window.descriptionValue)d=window.descriptionValue();}catch(e){}}if(!d)d=document.title||"form";return clean(d);}
   function tag(){try{var el=document.getElementById("macTag");return el?String(el.value||"").trim():"";}catch(e){return "";}}
   function post(p){return fetch(U,{method:"POST",mode:"no-cors",keepalive:true,headers:{"Content-Type":"text/plain"},body:JSON.stringify(p)});}
   function queue(p){try{var q=JSON.parse(localStorage.getItem(QK)||"[]");q.push(p);localStorage.setItem(QK,JSON.stringify(q.slice(-1000)));}catch(e){}}

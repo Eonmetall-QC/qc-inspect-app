@@ -5,7 +5,7 @@
   "description": "Inspector: open and fill IPQC in-process inspection forms.",
   "start_url": "./QC_Inspect_Hub.html",
   "scope": "./",
-  "display": "standalone",
+  "display": "browser",
   "orientation": "any",
   "background_color": "#1558b0",
   "theme_color": "#1558b0",
